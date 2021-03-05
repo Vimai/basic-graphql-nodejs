@@ -1,4 +1,6 @@
-const { graphql, buildSchema } = require('graphql');
+var express = require('express');
+var { graphqlHTTP } = require('express-graphql');
+var { buildSchema } = require('graphql');
 
 const schema = buildSchema(`
     type Query {
@@ -10,11 +12,13 @@ const resolver =  {
     olaMundo: (() => 'Olá Mundo!')
 }
 
-graphql(schema, '{ olaMundo }', resolver).then((response) => {
-    console.log(response);
-});
+var app = express();
 
+app.use('/graphql', graphqlHTTP({
+  schema: schema,
+  rootValue: resolver,
+  graphiql: true,
+}));
 
-// const server = New AppoloServer({typeDefs: schema, resolvers})
-
-// const app = express
+app.listen(4000);
+console.log('Running a GraphQL API server at http://localhost:4000/graphql');
