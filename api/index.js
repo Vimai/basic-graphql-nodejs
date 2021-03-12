@@ -12,12 +12,12 @@ const resolvers = [userResolvers]
 const server = new ApolloServer({
    typeDefs,
    resolvers,
-   datasource: () => {
+   dataSources: () => {
      return {
        usersAPI: new UsersAPI()
      }
    }
-   });
+})
 
 // The `listen` method launches a web server.
 server.listen().then(({ url }) => {
