@@ -19,6 +19,11 @@ const userSchema = gql`
     user(id: ID!): User!
   }
 
+  # Mutation realiza alterações 
+  type Mutation {
+    adicionaUser(nome: String!, ativo: Boolean!, email: String, role: String!): User!
+  }
+
 `;
 
 module.exports =  userSchema
