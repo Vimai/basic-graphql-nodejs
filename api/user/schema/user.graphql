@@ -39,8 +39,25 @@ scalar DateTime
   # Mutation realiza alterações 
   type Mutation {
     adicionaUser(user: UserInput): User!
-    atualizaUser(id: ID!, user: UserInput): User!
-    deletaUser(id: ID!): ID!
+    atualizaUser(id: ID!, user: UserInput): atualizaUserResposta!
+    deletaUser(id: ID!): deletaUserRespota!
+  }
+
+  interface respostaCustom {
+    # tipo abstrato
+    code: Int!
+    mensagem: String!
+  }
+
+  type deletaUserRespota implements respostaCustom {
+    code: Int!
+    mensagem: String!
+  }
+
+  type atualizaUserResposta implements respostaCustom {
+    code: Int!
+    mensagem: String!
+    user: User!
   }
 
 `;
